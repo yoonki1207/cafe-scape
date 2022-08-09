@@ -1,13 +1,13 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import SouthKorea from "./SouthKorea";
+import { Route, Routes } from "react-router-dom";
+import "./App.scss";
+import Main from "./components/Main";
+import PhotosCompoenent from "./components/PhotosComponent";
 
 function App() {
   return (
-    <div className="App">
-      <SouthKorea />
-    </div>
+    <Routes>
+      <Route path='/*' element={<Main/>}/>
+    </Routes>
   );
 }
 

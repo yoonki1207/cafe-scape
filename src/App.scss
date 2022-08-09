@@ -1,0 +1,47 @@
+$primary: #1d1e1f;
+$primary-font: #cfdfef;
+$primary-background: #aaaaaa;
+
+body{
+  color: $primary-font;
+  height: 100vh;
+  background-color: $primary;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .title {
+    position: absolute;
+    top: 17%;
+    color: $primary-font;
+    font-size: 5rem;
+    transition: 1s all ease;
+  }
+}
+
+.land {
+  fill: $primary-background;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-opacity: 1;
+  stroke-width: 1;
+  transition: .3s all ease;
+  cursor: pointer;
+}
+
+.land:hover {
+  fill: $primary;
+  stroke-width: 3;
+}
+
