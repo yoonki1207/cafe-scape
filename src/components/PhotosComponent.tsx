@@ -13,7 +13,11 @@ const PhotosCompoenent = () => {
     setStarting(true);
     setClassState({ ...classState, start: true });
   }, []);
-  return <div className={classNames(classState)}></div>;
+  return (
+    <div className={classNames(classState)}>
+      <div className="container"></div>
+    </div>
+  );
 };
 
 export default PhotosCompoenent;
