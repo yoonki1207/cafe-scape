@@ -30,6 +30,7 @@ const SouthKorea: React.FC<any> = ({ onHide }) => {
 
   useEffect(() => {
     setHover("");
+    return () => console.log("South Korea Unmounted");
   }, []);
   return (
     <>

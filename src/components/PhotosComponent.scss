@@ -1,0 +1,8 @@
+
+.photosapp {
+    opacity: 0;
+    transition: 0.8s all ease;
+    &.start {
+        opacity: 1;
+    }
+}
