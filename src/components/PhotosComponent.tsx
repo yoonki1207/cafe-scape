@@ -1,11 +1,13 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
+import Button from "./button/Button";
 import "./PhotosComponent.scss";
+import Background from "../img/KakaoTalk_20220811_162903983_03.jpg"; // config.d.ts는 자동생성된 파일이라 착각해서 무시됨,. images.d.ts로 생성
 
 const PhotosCompoenent = () => {
   const [starting, setStarting] = useState(false);
+  const [bgUrl, setBgUrl] = useState(Background);
   const [classState, setClassState] = useState({
-    photosapp: true,
     start: false,
   });
 
@@ -13,9 +15,20 @@ const PhotosCompoenent = () => {
     setStarting(true);
     setClassState({ ...classState, start: true });
   }, []);
+  // url 어케바꿈
+  const onClickPrev = () => {};
+  const onClickNext = () => {};
   return (
-    <div className={classNames(classState)}>
-      <div className="container"></div>
+    <div className={classNames(classState, "photosapp")}>
+      <Button value="<" onClick={onClickPrev} />
+      <div
+        className={classNames(classState, "container")}
+        style={{
+          background: `url('${Background}')`,
+          backgroundSize: "contain",
+        }}
+      ></div>
+      <Button value=">" onClick={onClickNext} />
     </div>
   );
 };
