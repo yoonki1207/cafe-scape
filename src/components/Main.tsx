@@ -7,33 +7,11 @@ import { Route, Routes } from "react-router-dom";
 import PhotosCompoenent from "./PhotosComponent";
 
 function Main() {
-  const [hover, setHover] = useState<string>("");
-
-  const onMouseMove = (e: any) => {
-      console.log()
-      try{
-          if(e.target.id === '') {
-              setHover('')
-          } else {
-              const name = areaNames.filter(area => area.id === e.target.id)[0].title;
-              setHover(name);
-          }
-      } catch (e: any) {
-
-      }
-  }
-
-  useEffect(()=>{
-    setHover('');
-  }, []);
-
-  return (
-    <div className="app">
-      <SouthKorea onMouseMove={onMouseMove}/>
-      <PhotosCompoenent/>
-      <MainTitle title={hover} />
-    </div>
-  );
+  const [showMap, setShowMap] = useState<boolean>(true);
+  const onHide = () => {
+    setShowMap(false);
+  };
+  return <div className="app">{showMap && <SouthKorea onHide={onHide} />}</div>;
 }
 
 export default Main;
