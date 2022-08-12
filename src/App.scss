@@ -4,6 +4,7 @@ body{
   color: $primary-font;
   height: 100vh;
   background-color: $primary;
+  overflow: hidden;
 }
 
 #root {
