@@ -7,7 +7,7 @@ const Button: React.FC<{ value: string; onClick: () => void }> = ({
 }) => {
   return (
     <button type="submit" onClick={onClick}>
-      {value}
+      {/* {value} */}
     </button>
   );
 };
