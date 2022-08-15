@@ -82,19 +82,19 @@ const PhotosCompoenent = () => {
 
   return (
     <div className={classNames(classState, "photosapp")}>
-      <Button value="<" onClick={onClickPrev} />
       <div className="emptyContainer">
         {loadedImgs.map((data) => (
           <PhotoComponent
-            key={data.url}
-            bgUrl={data.url}
-            title={data.title}
-            desc={data.desc}
+          key={data.url}
+          bgUrl={data.url}
+          title={data.title}
+          desc={data.desc}
           />
-        ))}
+          ))}
       </div>
-
+      <Button value="<" onClick={onClickPrev} />
       <Button value=">" onClick={onClickNext} />
+      <a href='#' className="close"/>
     </div>
   );
 };
