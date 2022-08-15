@@ -4,6 +4,7 @@ import Button from "./button/Button";
 import "./PhotosComponent.scss";
 // config.d.ts는 자동생성된 파일이라 착각해서 무시됨,. images.d.ts로 생성
 import PhotoComponent from "./photo/PhotoComponent";
+import BottomScroll from "./main-scroll/BottomScroll";
 
 const IMG_DATAS = [
   {
@@ -83,15 +84,19 @@ const PhotosCompoenent = () => {
               title={IMG_DATAS[0].title}
               desc={IMG_DATAS[0].desc}
             />
+            <a href="" className="close" />
           </div>
         </div>
         <Button onClick={onClickNext} />
       </div>
-      <div className="scrollArea"></div>
+      <div className="scrollArea">
+        <BottomScroll datas={IMG_DATAS} />
+      </div>
     </div>
   );
 };
 
+// 스크롤 에리아의 사진들은 사진 크기별로 렌더링하는건 어떨까 싶음. 높이는 고정, 그에따른 가로비율을 조정해서 다양한 items를 배치.
 export default PhotosCompoenent;
 
 /*

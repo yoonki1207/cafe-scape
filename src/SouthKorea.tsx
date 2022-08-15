@@ -24,8 +24,10 @@ const SouthKorea: React.FC<any> = ({ onHide }) => {
   };
 
   const onClick = (e: any) => {
-    setHide(true);
-    setTimeout(onHide, 300);
+    if (e.target.id) {
+      setHide(true);
+      setTimeout(onHide, 300);
+    }
   };
 
   useEffect(() => {

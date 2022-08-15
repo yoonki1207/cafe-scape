@@ -1,0 +1,20 @@
+@import '../../Variables.scss';
+
+.scrollContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width:max-content;
+    .imageItem {
+        margin: 36px;
+        width: 210px;
+        height: 140px;
+        border: 1px solid $primary-border;  
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
