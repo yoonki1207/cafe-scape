@@ -54,47 +54,40 @@ const IMG_DATAS = [
 ];
 
 const PhotosCompoenent = () => {
-  const [classState, setClassState] = useState({
-    start: false,
-  });
-  const [loadedImgs, setLoadedImgs] = useState([IMG_DATAS[0]]);
-  const currentIndex = useRef(1);
+  const index = useRef(0);
+  const [src, setSrc] = useState(IMG_DATAS[0].url);
+  const onClickPrev = () => {
+    index.current--;
+    if (index.current < 0) index.current = IMG_DATAS.length - 1;
+    setSrc(IMG_DATAS[index.current].url);
+  };
+
+  const onClickNext = () => {
+    index.current++;
+    if (index.current >= IMG_DATAS.length) index.current = 0;
+    setSrc(IMG_DATAS[index.current].url);
+  };
 
   useEffect(() => {
-    setClassState({ ...classState, start: true });
-  }, []);
-  // url 어케바꿈
-  const onClickPrev = () => {
-    try {
-      if (currentIndex.current - 1 <= 0) currentIndex.current = 0;
-      else setLoadedImgs(loadedImgs.concat(IMG_DATAS[--currentIndex.current]));
-    } catch (e) {}
-  };
-  const onClickNext = () => {
-    try {
-      if (currentIndex.current + 1 >= IMG_DATAS.length)
-        currentIndex.current = IMG_DATAS.length - 1;
-      else setLoadedImgs(loadedImgs.concat(IMG_DATAS[++currentIndex.current]));
-    } catch (e) {}
-  };
-
-  useEffect(() => {}, [loadedImgs]);
-
+    console.log(src);
+  }, [index, src]);
   return (
-    <div className={classNames(classState, "photosapp")}>
-      <div className="emptyContainer">
-        {loadedImgs.map((data) => (
-          <PhotoComponent
-          key={data.url}
-          bgUrl={data.url}
-          title={data.title}
-          desc={data.desc}
-          />
-          ))}
+    <div className="photosComponentContainer">
+      <div className="mainArea">
+        <Button onClick={onClickPrev} />
+        <div className="photoArea">
+          <div className="photoBox">
+            {/* <div className="photo"></div> */}
+            <PhotoComponent
+              bgUrl={IMG_DATAS[index.current].url}
+              title={IMG_DATAS[0].title}
+              desc={IMG_DATAS[0].desc}
+            />
+          </div>
+        </div>
+        <Button onClick={onClickNext} />
       </div>
-      <Button value="<" onClick={onClickPrev} />
-      <Button value=">" onClick={onClickNext} />
-      <a href='#' className="close"/>
+      <div className="scrollArea"></div>
     </div>
   );
 };

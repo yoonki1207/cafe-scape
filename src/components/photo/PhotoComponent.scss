@@ -2,17 +2,13 @@
 
 
 .photoComponentContainer{
-    width:100%;
-    height: 100%;
-    position: absolute;
-    background-color: $primary;
+    margin: 40px;
+    width: 900px;
+    height: 600px;
 }
 .containerStart{
-    position: absolute;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 0 1px #fff inset;
-    transition: 0.3s all ease;
     
     animation-name: fade-in;
     animation-duration:0.3s;

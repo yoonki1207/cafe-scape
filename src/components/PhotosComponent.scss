@@ -1,54 +1,40 @@
 @import '../Variables.scss';
 
-.photosapp {
-    width: 100%;
-    height: 100%;
-    position: relative;
+
+.photosComponentContainer {
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    opacity: 0;
-    transition: 0.3s all ease;
-    justify-content: space-between;
-    align-items: center;
-    &.start {
-        opacity: 1;
-    }
-    .container {
-        opacity: 0;
+    flex-direction: column;
 
-        &.start {
-            opacity: 1;
+    .mainArea{
+        flex-grow: 1;
+        display: flex;
+        .photoArea {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .photoBox{
+                display: flex;
+                border: 1px solid #9f9f9f;
+                align-items: center;
+                justify-content: center;
+                .photo {
+                    margin: 40px;
+                    width: 900px;
+                    height: 600px;
+                    // background: url('../../public/img/Img_sample_01.jpeg');
+                    background-size: cover;
+                }
+            }
         }
     }
 
-    .close {
-        font-size: xx-large;
-        position: absolute;
-        right: 2%;
-        top: 2%;
-        &:hover {
-            opacity: 1;
-        }
-        &:before, &:after {
-            position: absolute;
-            left: 15px;
-            content: ' ';
-            height: 33px;
-            width: 2px;
-            background-color: #333;
-        }
-        &:before {
-            transform: rotate(45deg);
-        }
-        &:after {
-            transform: rotate(-45deg);
-        }
+    .scrollArea {
+        flex-grow: 0;
+        width: 100vw;
+        height: 200px;
+        border-top: 1px solid #9f9f9f;
     }
-    
-    .emptyContainer {
-        position: absolute;
-        width: 100%;
-        height: 100%;  
-        
-    }
-    
 }
