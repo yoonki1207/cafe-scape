@@ -6,7 +6,7 @@ import SouthKoreaSVG from "./southKoreaSvg";
 import MainTitle from "./components/MainTitle";
 import areaNames from "./components/MapNames";
 
-const SouthKorea: React.FC<any> = ({ onHide }) => {
+const SouthKorea: React.FC<any> = ({ onHide, setAreaName }) => {
   const [hide, setHide] = useState<boolean>(false);
   const [hover, setHover] = useState<string>("");
 
@@ -27,6 +27,7 @@ const SouthKorea: React.FC<any> = ({ onHide }) => {
     if (e.target.id) {
       setHide(true);
       setTimeout(onHide, 300);
+      setAreaName(areaNames.filter((area) => area.id === e.target.id)[0].title);
     }
   };
 

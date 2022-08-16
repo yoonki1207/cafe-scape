@@ -9,6 +9,7 @@ import PhotosCompoenent from "./PhotosComponent";
 function Main() {
   const [showMap, setShowMap] = useState<boolean>(true);
   const [showPhotos, setShowPhotos] = useState<boolean>(false);
+  const [areaName, setAreaName] = useState<string>("jeju");
   const onHide = () => {
     // 애니메이션 끝나고 바로 호출되는 함수임 startState, endState, onState 구분해야함.
     setShowMap(false);
@@ -16,8 +17,8 @@ function Main() {
   };
   return (
     <div className="app">
-      {showMap && <SouthKorea onHide={onHide} />}
-      {showPhotos && <PhotosCompoenent />}
+      {showMap && <SouthKorea onHide={onHide} setAreaName={setAreaName} />}
+      {showPhotos && <PhotosCompoenent areaName={areaName} />}
     </div>
   );
 }

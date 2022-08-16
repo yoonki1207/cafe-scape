@@ -6,82 +6,45 @@ import "./PhotosComponent.scss";
 import PhotoComponent from "./photo/PhotoComponent";
 import BottomScroll from "./main-scroll/BottomScroll";
 import { useKeyState } from "../hooks/useKeyState";
+import UnsplashAPI from "../apis/UnsplashAPI";
+import { UnsplashResultType } from "../types/UnsplashTypes";
 
-const IMG_DATAS = [
-  {
-    url: "/img/KakaoTalk_20220811_162903983_01.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/KakaoTalk_20220811_162903983_02.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/KakaoTalk_20220811_162903983_03.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/KakaoTalk_20220811_162903983_04.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/KakaoTalk_20220811_162903983_05.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/KakaoTalk_20220811_162903983_06.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/KakaoTalk_20220811_162903983_07.jpg",
-    title: "TITLE",
-    desc: "DESCRIPTION",
-  },
-  {
-    url: "/img/Img_sample_00.jpeg",
-    title: "England",
-    desc: "Untitlted, England",
-  },
-  {
-    url: "/img/Img_sample_01.jpeg",
-    title: "France",
-    desc: "Paris, France",
-  },
-];
-
-const PhotosCompoenent = () => {
+const PhotosCompoenent: React.FC<{ areaName: string }> = ({ areaName }) => {
   useKeyState((e: KeyboardEvent) => {
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") onClickPrev();
     if (e.key === "ArrowRight" || e.key === "ArrowDown") onClickNext();
   });
   const index = useRef(0);
-  const [currentImg, setCurrentImg] = useState({
-    ...IMG_DATAS[0],
-  });
+  const [currentImg, setCurrentImg] = useState<UnsplashResultType | null>(null);
+  const [imgData, setImgData] = useState<UnsplashResultType[] | null>(null);
   const onClickPrev = () => {
-    index.current--;
-    if (index.current < 0) index.current = IMG_DATAS.length - 1;
-    setCurrentImg({ ...IMG_DATAS[index.current] });
+    if (imgData) {
+      index.current--;
+      if (index.current < 0) index.current = imgData.length - 1;
+      setCurrentImg({ ...imgData[index.current] });
+    }
   };
 
   const onClickNext = () => {
-    index.current++;
-    if (index.current >= IMG_DATAS.length) index.current = 0;
-    setCurrentImg({ ...IMG_DATAS[index.current] });
+    if (imgData) {
+      index.current++;
+      if (index.current >= imgData.length) index.current = 0;
+      imgData && setCurrentImg({ ...imgData[index.current] });
+    }
   };
 
   useEffect(() => {
+    async function getImgs() {
+      console.log("GET NEW IMAGES FOR", areaName);
+      const results = await UnsplashAPI(areaName);
+      setImgData(results);
+      setCurrentImg(results[0]);
+    }
+    getImgs();
     function transformScroll(event: any) {
       if (!event.deltaY) {
         return;
       }
-
       const element = document.getElementsByClassName("scrollArea")[0];
       element.scrollLeft += event.deltaY + event.deltaX;
     }
@@ -94,14 +57,14 @@ const PhotosCompoenent = () => {
         <div className="photoArea">
           <div className="photoBox">
             {/* <div className="photo"></div> */}
-            <PhotoComponent imgData={currentImg} />
+            {currentImg && <PhotoComponent imgData={currentImg} />}
             <a href="" className="close" />
           </div>
         </div>
         <Button onClick={onClickNext} />
       </div>
       <div className="scrollArea">
-        <BottomScroll datas={IMG_DATAS} />
+        <BottomScroll datas={imgData} />
       </div>
     </div>
   );
