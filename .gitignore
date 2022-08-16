@@ -22,5 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# imgs
-./src/img/*
+# unsplash api key
+.api_key.js
