@@ -12,7 +12,7 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
   canvasHeight,
   url,
 }) => {
-  const fillBackground = (ctx: CanvasRenderingContext2D) => {
+  const drawImage = (ctx: CanvasRenderingContext2D) => {
     const img = new Image();
     // img.src = "/img/KakaoTalk_20220811_162903983_07.jpg";
     img.src = url;
@@ -34,7 +34,7 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
     };
   };
 
-  const canvasRef = useCanvas(canvasWidth, canvasHeight, fillBackground);
+  const canvasRef = useCanvas(canvasWidth, canvasHeight, drawImage, [url]);
 
   return <canvas ref={canvasRef} />;
 };

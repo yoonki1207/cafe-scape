@@ -5,6 +5,7 @@ import "./PhotosComponent.scss";
 // config.d.ts는 자동생성된 파일이라 착각해서 무시됨,. images.d.ts로 생성
 import PhotoComponent from "./photo/PhotoComponent";
 import BottomScroll from "./main-scroll/BottomScroll";
+import { useKeyState } from "../hooks/useKeyState";
 
 const IMG_DATAS = [
   {
@@ -55,23 +56,37 @@ const IMG_DATAS = [
 ];
 
 const PhotosCompoenent = () => {
+  useKeyState((e: KeyboardEvent) => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") onClickPrev();
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") onClickNext();
+  });
   const index = useRef(0);
-  const [src, setSrc] = useState(IMG_DATAS[0].url);
+  const [currentImg, setCurrentImg] = useState({
+    ...IMG_DATAS[0],
+  });
   const onClickPrev = () => {
     index.current--;
     if (index.current < 0) index.current = IMG_DATAS.length - 1;
-    setSrc(IMG_DATAS[index.current].url);
+    setCurrentImg({ ...IMG_DATAS[index.current] });
   };
 
   const onClickNext = () => {
     index.current++;
     if (index.current >= IMG_DATAS.length) index.current = 0;
-    setSrc(IMG_DATAS[index.current].url);
+    setCurrentImg({ ...IMG_DATAS[index.current] });
   };
 
   useEffect(() => {
-    console.log(src);
-  }, [index, src]);
+    function transformScroll(event: any) {
+      if (!event.deltaY) {
+        return;
+      }
+
+      const element = document.getElementsByClassName("scrollArea")[0];
+      element.scrollLeft += event.deltaY + event.deltaX;
+    }
+    window.addEventListener("wheel", transformScroll);
+  }, []);
   return (
     <div className="photosComponentContainer">
       <div className="mainArea">
@@ -79,11 +94,7 @@ const PhotosCompoenent = () => {
         <div className="photoArea">
           <div className="photoBox">
             {/* <div className="photo"></div> */}
-            <PhotoComponent
-              bgUrl={IMG_DATAS[index.current].url}
-              title={IMG_DATAS[0].title}
-              desc={IMG_DATAS[0].desc}
-            />
+            <PhotoComponent imgData={currentImg} />
             <a href="" className="close" />
           </div>
         </div>

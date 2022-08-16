@@ -3,7 +3,8 @@ import { RefObject, useEffect, useRef } from "react";
 export const useCanvas = (
   canvasWidth: number,
   canvasHeight: number,
-  animate: (ctx: CanvasRenderingContext2D) => void
+  animate: (ctx: CanvasRenderingContext2D) => void,
+  deps?: any[]
 ) => {
   const canvasRef: RefObject<HTMLCanvasElement> =
     useRef<HTMLCanvasElement>(null);
@@ -28,7 +29,7 @@ export const useCanvas = (
       }
     };
     setCanvas();
-  });
+  }, [canvasWidth, canvasHeight].concat(deps ?? []));
 
   return canvasRef;
 };
