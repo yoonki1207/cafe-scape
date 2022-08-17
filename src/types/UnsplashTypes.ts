@@ -1,12 +1,6 @@
 export type UnsplashResultType = {
     id:string,
-    urls: {
-        full: string,
-        raw: string,
-        regular: string,
-        small: string,
-        thumb: string,
-    },
+    urls: UnsplashUrls,
     user: {
         first_name: string,
         id: string,
@@ -19,4 +13,12 @@ export type UnsplashResultType = {
             small: string,
         }
     }
+}
+
+export type UnsplashUrls = {
+    full: string,
+    raw: string,
+    regular: string,
+    small: string,
+    thumb: string,
 }

@@ -11,7 +11,7 @@ import { UnsplashResultType } from "../types/UnsplashTypes";
 import { useParams } from "react-router-dom";
 
 const PhotosComponent: React.FC = () => {
-  const { areaName } = useParams() && { areaName: "Korea" };
+  const { areaName } = useParams();
   useKeyState((e: KeyboardEvent) => {
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") onClickPrev();
     if (e.key === "ArrowRight" || e.key === "ArrowDown") onClickNext();
@@ -39,7 +39,7 @@ const PhotosComponent: React.FC = () => {
     console.log(`Area name is: ${areaName}`);
     async function getImgs() {
       console.log("GET NEW IMAGES FOR", areaName);
-      const results = await UnsplashAPI(areaName);
+      const results = await UnsplashAPI(areaName || "Korea" );
       setImgData(results);
       setCurrentImg(results[0]);
     }

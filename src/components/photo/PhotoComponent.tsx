@@ -10,7 +10,7 @@ const PhotoComponent: React.FC<{ imgData: UnsplashResultType }> = ({
   const { urls, user } = imgData;
   return (
     <div className="photoComponentContainer">
-      <ImageCanvas canvasWidth={900} canvasHeight={600} url={urls.full} />
+      <ImageCanvas canvasWidth={900} canvasHeight={600} urls={urls} />
     </div>
   );
 };
