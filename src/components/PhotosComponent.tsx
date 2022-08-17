@@ -8,8 +8,10 @@ import BottomScroll from "./main-scroll/BottomScroll";
 import { useKeyState } from "../hooks/useKeyState";
 import UnsplashAPI from "../apis/UnsplashAPI";
 import { UnsplashResultType } from "../types/UnsplashTypes";
+import { useParams } from "react-router-dom";
 
-const PhotosCompoenent: React.FC<{ areaName: string }> = ({ areaName }) => {
+const PhotosComponent: React.FC = () => {
+  const { areaName } = useParams() && { areaName: "Korea" };
   useKeyState((e: KeyboardEvent) => {
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") onClickPrev();
     if (e.key === "ArrowRight" || e.key === "ArrowDown") onClickNext();
@@ -34,6 +36,7 @@ const PhotosCompoenent: React.FC<{ areaName: string }> = ({ areaName }) => {
   };
 
   useEffect(() => {
+    console.log(`Area name is: ${areaName}`);
     async function getImgs() {
       console.log("GET NEW IMAGES FOR", areaName);
       const results = await UnsplashAPI(areaName);
@@ -58,7 +61,7 @@ const PhotosCompoenent: React.FC<{ areaName: string }> = ({ areaName }) => {
           <div className="photoBox">
             {/* <div className="photo"></div> */}
             {currentImg && <PhotoComponent imgData={currentImg} />}
-            <a href="" className="close" />
+            <a href="/" className="close" />
           </div>
         </div>
         <Button onClick={onClickNext} />
@@ -71,7 +74,7 @@ const PhotosCompoenent: React.FC<{ areaName: string }> = ({ areaName }) => {
 };
 
 // 스크롤 에리아의 사진들은 사진 크기별로 렌더링하는건 어떨까 싶음. 높이는 고정, 그에따른 가로비율을 조정해서 다양한 items를 배치.
-export default PhotosCompoenent;
+export default PhotosComponent;
 
 /*
 

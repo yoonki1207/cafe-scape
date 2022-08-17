@@ -12,7 +12,7 @@ const BottomScroll: React.FC<{ datas: UnsplashResultType[] | null }> = ({
     <div className="scrollContainer">
       {datas?.map((data) => (
         <div className="imageItem" key={data.urls.small}>
-          <img src={data.urls.small} alt="" />
+          <img src={data.urls.thumb} alt="" />
         </div>
       ))}
     </div>
