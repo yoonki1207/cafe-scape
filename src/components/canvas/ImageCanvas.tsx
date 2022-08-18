@@ -16,13 +16,12 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
   const drawImage = (ctx: CanvasRenderingContext2D) => {
     const simg = new Image();
     const img = new Image();
-    // img.src = "/img/KakaoTalk_20220811_162903983_07.jpg";
     img.src = urls.full;
     simg.src = urls.small;
 
-    console.log('Image load start')
+    console.log("Image load start");
     simg.onload = function () {
-      console.log('Small image loaded')
+      console.log("Small image loaded");
       const height = simg.height;
       const width = simg.width;
 
@@ -37,9 +36,9 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({
       ctx.filter = "blur(0px)";
       ctx.drawImage(simg, (canvasWidth - X) / 2, (canvasHeight - Y) / 2, X, Y);
       ctx.drawImage(img, (canvasWidth - X) / 2, (canvasHeight - Y) / 2, X, Y);
-    }
+    };
     img.onload = function () {
-      console.log('Full image loaded')
+      console.log("Full image loaded");
       const height = img.height;
       const width = img.width;
 

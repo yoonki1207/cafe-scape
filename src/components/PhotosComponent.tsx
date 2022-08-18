@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import Button from "./button/Button";
 import "./PhotosComponent.scss";
@@ -64,7 +63,6 @@ const PhotosComponent: React.FC = () => {
         <Button onClick={onClickPrev} />
         <div className="photoArea">
           <div className="photoBox">
-            {/* <div className="photo"></div> */}
             {currentImg && <PhotoComponent imgData={currentImg} />}
             <a href="/" className="close" />
           </div>

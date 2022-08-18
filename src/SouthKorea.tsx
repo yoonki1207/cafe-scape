@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import southkorea from "./southKoreaSvg";
 import "./SouthKorea.scss";
 import classNames from "classnames";
 import SouthKoreaSVG from "./southKoreaSvg";
@@ -27,7 +26,7 @@ const SouthKorea: React.FC<any> = ({ onHide }) => {
     if (e.target.id) {
       setHide(true);
       const name = areaNames.filter((area) => area.id === e.target.id)[0].title;
-      console.log(`Search for ${name}`)
+      console.log(`Search for ${name}`);
       setTimeout(() => onHide(name), 300);
     }
   };

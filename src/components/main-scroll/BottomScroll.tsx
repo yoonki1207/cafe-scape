@@ -2,10 +2,6 @@ import React from "react";
 import { UnsplashResultType } from "../../types/UnsplashTypes";
 import "./BottomScroll.scss";
 
-type ImgDataType = {
-  url: string;
-};
-
 const BottomScroll: React.FC<{
   datas: UnsplashResultType[] | null;
   onClick: (index: number) => void;

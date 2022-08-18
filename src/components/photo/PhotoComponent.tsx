@@ -7,7 +7,7 @@ import "./PhotoComponent.scss";
 const PhotoComponent: React.FC<{ imgData: UnsplashResultType }> = ({
   imgData,
 }) => {
-  const { urls, user } = imgData;
+  const { urls } = imgData;
   return (
     <div className="photoComponentContainer">
       <ImageCanvas canvasWidth={900} canvasHeight={600} urls={urls} />
