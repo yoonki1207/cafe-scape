@@ -35,11 +35,16 @@ const PhotosComponent: React.FC = () => {
     }
   };
 
+  const onClickThum = (index: number) => {
+    if (imgData && index >= 0 && index < imgData.length)
+      setCurrentImg({ ...imgData[index] });
+  };
+
   useEffect(() => {
     console.log(`Area name is: ${areaName}`);
     async function getImgs() {
       console.log("GET NEW IMAGES FOR", areaName);
-      const results = await UnsplashAPI(areaName || "Korea" );
+      const results = await UnsplashAPI(areaName || "Korea");
       setImgData(results);
       setCurrentImg(results[0]);
     }
@@ -67,7 +72,7 @@ const PhotosComponent: React.FC = () => {
         <Button onClick={onClickNext} />
       </div>
       <div className="scrollArea">
-        <BottomScroll datas={imgData} />
+        <BottomScroll datas={imgData} onClick={onClickThum} />
       </div>
     </div>
   );
